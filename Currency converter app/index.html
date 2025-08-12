@@ -1,0 +1,42 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html ng-app="converterApp">
+<head>
+    <title>Converter App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="app.js"></script>
+    <script src="currencyConverter.js"></script>
+    <script src="lengthConverter.js"></script>
+    <script src="numberBaseConverter.js"></script>
+    <script src="temperatureConverter.js"></script>
+    <style>
+        body {
+            padding: 20px;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        .converter {
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" ng-controller="MainController">
+        <h1>{{ title }}</h1>
+        <div class="converter">
+            <currency-converter></currency-converter>
+        </div>
+        <div class="converter">
+            <length-converter></length-converter>
+        </div>
+        <div class="converter">
+            <number-base-converter></number-base-converter>
+        </div>
+        <div class="converter">
+            <temperature-converter></temperature-converter>
+        </div>
+    </div>
+</body>
+</html>

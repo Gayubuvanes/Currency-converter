@@ -1,0 +1,9 @@
+<!-- currencyConverter.html -->
+<div class="converter">
+    <h2>Currency Converter</h2>
+    <input type="number" ng-model="amount" placeholder="Amount" class="form-control">
+    <select ng-model="fromCurrency" ng-options="currency for currency in currencies" class="form-control"></select>
+    <select ng-model="toCurrency" ng-options="currency for currency in currencies" class="form-control"></select>
+    <button ng-click="convertCurrency()" class="btn btn-primary">Convert</button>
+    <p>Result: {{ result }}</p>
+</div>

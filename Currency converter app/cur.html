@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        input[type="number"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+        }
+
+        .header {
+            padding: 40px;
+            text-align: center;
+            background: gray;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 40px;
+        }
+
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            text-align: center;
+        }
+
+        .navbar a {
+            display: inline-block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .row {  
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+        }
+
+        .side {
+            -ms-flex: 30%;
+            flex: 30%;
+            background-color: #f1f1f1;
+            padding: 20px;
+        }
+
+        .main {
+            -ms-flex: 70%;
+            flex: 70%;
+            background-color: white;
+            padding: 20px;
+        }
+
+        .fakeimg {
+            background-color: #aaa;
+            width: 100%;
+            padding: 20px;
+        }
+
+        .footer {
+            padding: 10px;
+            text-align: center;
+            background: #ddd;
+            font-size: 10px;
+        }
+
+        @media screen and (max-width: 700px) {
+            .row {
+                flex-direction: column;
+            }
+        }
+
+        @media screen and (max-width: 400px) {
+            .navbar a {
+                float: none;
+                width: 100%;
+            }
+        }
+    </style>
+        <script src="angular.js"></script>
+
+    <script>
+        var myapp = angular.module("converterApp", []);
+        myapp.controller("converterController", function($scope) {
+            $scope.convert = function() {
+                var src = $scope.fromCurrency;
+                var dst = $scope.toCurrency;
+                var value = parseFloat($scope.amount);
+
+                if (isNaN(value)) {
+                    $scope.output = "Please enter a valid number.";
+                    return;
+                }
+
+                if (src === "INR") {
+                    if (dst === "USD") {
+                        $scope.output = "Rupee to Dollar is " + (value * 0.013);
+                    } else if (dst === "EUR") {
+                        $scope.output = "Rupee to Euro is " + (value * 0.012);
+                    } else {
+                        $scope.output = "Invalid conversion type";
+                    }
+                } else if (src === "USD") {
+                    if (dst === "INR") {
+                        $scope.output = "Dollar to Rupee is " + (value * 76.58);
+                    } else if (dst === "EUR") {
+                        $scope.output = "Dollar to Euro is " + (value * 0.92);
+                    } else {
+                        $scope.output = "Invalid conversion type";
+                    }
+                } else if (src === "EUR") {
+                    if (dst === "INR") {
+                        $scope.output = "Euro to Rupee is " + (value * 83.22);
+                    } else if (dst === "USD") {
+                        $scope.output = "Euro to Dollar is " + (value * 1.09);
+                    } else {
+                        $scope.output = "Invalid conversion type";
+                    }
+                } else {
+                    $scope.output = "Invalid conversion type";
+                }
+            };
+        });
+    </script>
+</head>
+<body ng-app="converterApp">
+
+<div class="header">
+    <h2>Conversion App</h2>
+    <p>Convert and Conquer</p>
+</div>
+
+<div class="navbar">
+    <a href="home.html">HOME</a>
+    <a href="temp.html">TEMPERATURE</a>
+    <a href="cur.html">CURRENCY</a>
+    <a href="num.html">NUMBER BASE</a>
+    <a href="len.html">LENGTH</a>
+    <a href="reg.html" class="right">LOGIN</a>
+</div>
+
+<br>
+<div class="container">
+    <h2>Currency Converter</h2>
+    <div ng-controller="converterController">
+        <label for="amount">Amount:</label>
+        <input type="number" ng-model="amount" name="amount" step="0.01" required>
+
+        <label for="fromCurrency">From:</label>
+        <select ng-model="fromCurrency" name="fromCurrency">
+            <option value="INR">Indian Rupee (INR)</option>
+            <option value="EUR">Euro (EUR)</option>
+            <option value="USD">US Dollar (USD)</option>
+        </select>
+
+        <label for="toCurrency">To:</label>
+        <select ng-model="toCurrency" name="toCurrency">
+            <option value="INR">Indian Rupee (INR)</option>
+            <option value="EUR">Euro (EUR)</option>
+            <option value="USD">US Dollar (USD)</option>
+        </select>
+
+        <button type="button" ng-click="convert()">Convert</button>
+
+        <div class="result" id="result">
+            <p>{{output}}</p>
+        </div>
+    </div>
+    <br>
+</div><script src="angular.js"></script>
+<script>
+var myapp=angular.module("n1",[]);
+myapp.controller("c1",function($scope){
+	$scope.convertLength=function(){
+	var src=$scope.fromUnit;
+	var dst=$scope.toUnit;
+	var value = parseFloat($scope.amount);
+
+                if (isNaN(value)) {
+                    $scope.output = "Please enter a valid number.";
+                    return;
+                }
+		
+	
+	else if (src === "meter") {
+                    if (dst === "centimeter") {
+                        $scope.output = "Meter to Centimeter is " + (value * 100);
+                    } else if (dst === "foot") {
+                        $scope.output = "Meter to Foot is " + (value * 3.28084);
+                    } else {
+                        $scope.output = "Invalid conversion type";
+                    }
+                } else if (src === "centimeter") {
+                    if (dst === "meter") {
+                        $scope.output = "Centimeter to Meter is " + (value / 100);
+                    } else if (dst === "inch") {
+                        $scope.output = "Centimeter to Inch is " + (value * 0.393701);
+                    } else {
+                        $scope.output = "Invalid conversion type";
+                    }
+                } else if (src === "foot") {
+                    if (dst === "meter") {
+                        $scope.output = "Foot to Meter is " + (value / 3.28084);
+                    } else {
+                        $scope.output = "Invalid conversion type";
+                    }
+                } else if (src === "inch") {
+                    if (dst === "centimeter") {
+                        $scope.output = "Inch to Centimeter is " + (value / 0.393701);
+                    } else {
+                        $scope.output = "Invalid conversion type";
+                    }
+
+}
+
+};
+});
+</script>
+
+
+<div class="footer">
+    <h2>Footer</h2>
+</div>
+
+</body>
+</html>

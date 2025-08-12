@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        input[type="text"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+/* Header/logo Title */
+.header {
+  padding: 40px;
+  text-align: center;
+  background: gray;
+  color: white;
+}
+
+/* Increase the font size of the heading */
+.header h1 {
+  font-size: 40px;
+}
+
+/* Style the top navigation bar */
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+}
+
+/* Style the navigation bar links */
+.navbar a {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+}
+
+/* Right-aligned link */
+.navbar a.right {
+  float: right;
+}
+
+/* Change color on hover */
+.navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Column container */
+.row {  
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  -ms-flex-wrap: wrap; /* IE10 */
+  flex-wrap: wrap;
+}
+
+/* Create two unequal columns that sits next to each other */
+/* Sidebar/left column */
+.side {
+  -ms-flex: 30%; /* IE10 */
+  flex: 30%;
+  background-color: #f1f1f1;
+  padding: 20px;
+}
+
+/* Main column */
+.main {   
+  -ms-flex: 70%; /* IE10 */
+  flex: 70%;
+  background-color: white;
+  padding: 20px;
+}
+
+/* Fake image, just for this example */
+.fakeimg {
+  background-color: #aaa;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Footer */
+.footer {
+  padding: 20px;
+  text-align: center;
+  background: #ddd;
+}
+
+/* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 700px) {
+  .row {   
+    flex-direction: column;
+  }
+}
+
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media screen and (max-width: 400px) {
+  .navbar a {
+    float: none;
+    width: 100%;
+  }
+}
+
+
+    </style>
+<script src="angular.js"></script>
+<script>
+var myapp=angular.module("n1",[]);
+myapp.controller("c1",function($scope){
+	$scope.convertNumber=function(){
+	var src=$scope.fromBase;
+	var dst=$scope.toBase;
+	var value = parseFloat($scope.number);
+
+                if (isNaN(value)) {
+                    $scope.output = "Please enter a valid number.";
+                    return;
+                }
+		 else if (src === "decimal") {
+                    if (dst === "binary") {
+                        $scope.output = "Decimal to Binary is " + (parseInt(value, 10).toString(2));
+                    } else if (dst === "octal") {
+                        $scope.output = "Decimal to Octal is " + (parseInt(value, 10).toString(8));
+                    } else if (dst === "hexadecimal") {
+                        $scope.output = "Decimal to Hexadecimal is " + (parseInt(value, 10).toString(16).toUpperCase());
+                    } else {
+                        $scope.output = "Invalid conversion type";
+                    }
+                } else if (src === "binary") {
+                    if (dst === "decimal") {
+                        $scope.output = "Binary to Decimal is " + (parseInt(value, 2).toString(10));
+                    } else if (dst === "octal") {
+                        $scope.output = "Binary to Octal is " + (parseInt(value, 2).toString(8));
+                    } else if (dst === "hexadecimal") {
+                        $scope.output = "Binary to Hexadecimal is " + (parseInt(value, 2).toString(16).toUpperCase());
+                    } else {
+                        $scope.output = "Invalid conversion type";
+                    }
+                } else if (src === "octal") {
+                    if (dst === "decimal") {
+                        $scope.output = "Octal to Decimal is " + (parseInt(value, 8).toString(10));
+                    } else if (dst === "binary") {
+                        $scope.output = "Octal to Binary is " + (parseInt(value, 8).toString(2));
+                    } else if (dst === "hexadecimal") {
+                        $scope.output = "Octal to Hexadecimal is " + (parseInt(value, 8).toString(16).toUpperCase());
+                    } else {
+                        $scope.output = "Invalid conversion type";
+                    }
+                } else if (src === "hexadecimal") {
+                    if (dst === "decimal") {
+                        $scope.output = "Hexadecimal to Decimal is " + (parseInt(value, 16).toString(10));
+                    } else if (dst === "binary") {
+                        $scope.output = "Hexadecimal to Binary is " + (parseInt(value, 16).toString(2));
+                    } else if (dst === "octal") {
+                        $scope.output = "Hexadecimal to Octal is " + (parseInt(value, 16).toString(8));
+                    } else {
+                        $scope.output = "Invalid conversion type";
+                    }
+		}
+};
+});
+</script>
+
+
+</head>
+<body>
+<body ng-app="n1">
+
+<div class="header">
+<h2>Conversion App</h2>
+  <p>Convert and Conquer</p>
+</div>
+
+<div class="navbar">
+  <a href="converhome.html">HOME</a>
+  <a href="temp.html">TEMPERATURE</a>
+  <a href="cur.html">CURRENCY</a>
+  <a href="num.html">NUMBER BASE</a>
+<a href="len.html">LENGTH</a>
+
+  <a href="logi.html" class="right">LOGIN</a>
+</div>
+<br>
+
+    <div class="container">
+        <h2>Number Converter</h2>
+	<div ng-controller = "c1">
+
+
+            <label for="number">Number:</label>
+            <input type="text" ng-model="number" name="number" required>
+
+            <label for="fromBase">From Base:</label>
+            <select ng-model="fromBase" name="fromBase">
+                <option value="decimal">Decimal (Base 10)</option>
+                <option value="binary">Binary (Base 2)</option>
+                <option value="hexadecimal">Hexadecimal (Base 16)</option>
+                <option value="octal">Octal (Base 8)</option>
+            </select>
+
+            <label for="toBase">To Base:</label>
+            <select ng-model="toBase" name="toBase">
+                <option value="decimal">Decimal (Base 10)</option>
+                <option value="binary">Binary (Base 2)</option>
+                <option value="hexadecimal">Hexadecimal (Base 16)</option>
+                <option value="octal">Octal (Base 8)</option>
+            </select>
+
+            <button type="button" ng-click="convertNumber()">Convert</button>
+      
+        <div class="result" id="result">
+	<p>{{output}}</p>
+</div>
+    </div>
+</div>
+<br>
+<div class="footer">
+  <h2>Footer</h2>
+</div>
+
+</body>
+</html>

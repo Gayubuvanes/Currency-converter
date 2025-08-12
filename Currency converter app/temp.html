@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter</title>
+    <style>
+        /* Your existing CSS */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        input[type="number"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+        }
+
+        .header {
+            padding: 40px;
+            text-align: center;
+            background: gray;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 40px;
+        }
+
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            text-align: center;
+        }
+
+        .navbar a {
+            display: inline-block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .row {  
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+        }
+
+        .side {
+            -ms-flex: 30%;
+            flex: 30%;
+            background-color: #f1f1f1;
+            padding: 20px;
+        }
+
+        .main {
+            -ms-flex: 70%;
+            flex: 70%;
+            background-color: white;
+            padding: 20px;
+        }
+
+        .fakeimg {
+            background-color: #aaa;
+            width: 100%;
+            padding: 20px;
+        }
+
+        .footer {
+            padding: 10px;
+            text-align: center;
+            background: #ddd;
+            font-size: 10px;
+        }
+
+        @media screen and (max-width: 700px) {
+            .row {
+                flex-direction: column;
+            }
+        }
+
+        @media screen and (max-width: 400px) {
+            .navbar a {
+                float: none;
+                width: 100%;
+            }
+        }
+    </style>
+<script src="angular.js"></script>
+    <script>
+        var myapp = angular.module("n1", []);
+        myapp.controller("c1", function($scope) {
+            $scope.convertTemperature = function() {
+                var src = $scope.fromUnit;
+                var dst = $scope.toUnit;
+                var value = parseFloat($scope.amount);
+
+                if (isNaN(value)) {
+                    $scope.output = "Please enter a valid number.";
+                    return;
+                }
+
+                if (src === "celsius") {
+                    if (dst === "fahrenheit") {
+                        $scope.output = "Celsius to Fahrenheit is " + ((value * 9/5) + 32);
+                    } else if (dst === "celsius") {
+                        $scope.output = "Celsius to Celsius is " + value;
+                    } else {
+                        $scope.output = "Invalid conversion type";
+                    }
+                } else if (src === "fahrenheit") {
+                    if (dst === "celsius") {
+                        $scope.output = "Fahrenheit to Celsius is " + ((value - 32) * 5/9);
+                    } else if (dst === "fahrenheit") {
+                        $scope.output = "Fahrenheit to Fahrenheit is " + value;
+                    } else {
+                        $scope.output = "Invalid conversion type";
+                    }
+                } else {
+                    $scope.output = "Invalid conversion type";
+                }
+            };
+        });
+    </script>
+</head>
+<body ng-app="n1">
+
+<div class="header">
+    <h2>Conversion App</h2>
+    <p>Convert and Conquer</p>
+</div>
+
+<div class="navbar">
+    <a href="home.html">HOME</a>
+    <a href="temp.html">TEMPERATURE</a>
+    <a href="cur.html">CURRENCY</a>
+    <a href="num.html">NUMBER BASE</a>
+    <a href="len.html">LENGTH</a>
+    <a href="reg.html" class="right">LOGIN</a>
+</div>
+<br>
+
+<div class="container">
+    <h2>Temperature Converter</h2>
+    <div ng-controller="c1">
+        <label for="amount">Amount:</label>
+        <input type="number" ng-model="amount" name="amount" step="0.01" required />
+        <label for="fromUnit">From:</label>
+        <select ng-model="fromUnit" name="fromUnit">
+            <option value="celsius">Celsius</option>
+            <option value="fahrenheit">Fahrenheit</option>
+        </select>
+        <br><br>
+        <label for="toUnit">To:</label>
+        <select ng-model="toUnit" name="toUnit">
+            <option value="celsius">Celsius</option>
+            <option value="fahrenheit">Fahrenheit</option>
+        </select>
+        <br><br>
+        <button type="button" ng-click="convertTemperature();">Convert</button>
+        <br><br>
+        <div class="result" id="result">
+            <p>{{output}}</p>
+        </div>
+    </div>
+    <br>
+</div>
+
+<div class="footer">
+    <h2>Footer</h2>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #f4f4f4; /* Light gray background for the whole page */
+    }
+    .container {
+        max-width: 400px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        background-color: #ffffff; /* White background for each container */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for better separation */
+    }
+    .container:nth-child(1) {
+        background-color: #e3f2fd; /* Light blue for temperature */
+    }
+    .container:nth-child(2) {
+        background-color: #ffe0b2; /* Light orange for currency */
+    }
+    .container:nth-child(3) {
+        background-color: #c8e6c9; /* Light green for length */
+    }
+    .container:nth-child(4) {
+        background-color: #f8bbd0; /* Light pink for number base */
+    }
+    .container-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px; /* Space between containers */
+        justify-content: center;
+    }
+    .container {
+        flex: 1 1 calc(50% - 20px); /* Two containers per row with space */
+    }
+    input[type="number"], input[type="text"] {
+        width: calc(100% - 22px);
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    select {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    button {
+        width: 100%;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #45a049;
+    }
+    .result {
+        margin-top: 20px;
+        padding: 10px;
+        background-color: #f9f9f9;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    * {
+        box-sizing: border-box;
+    }
+</style>
